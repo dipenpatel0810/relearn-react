@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Counter from '../src/components/Counter';
+import Todo from '../src/components/Todo';
+import Home from './post-example/Home';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Counter /> */}
+    {/* <Todo /> */}
+    <Home />
   </React.StrictMode>,
   document.getElementById('root')
 );
