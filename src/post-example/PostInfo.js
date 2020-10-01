@@ -13,7 +13,6 @@ import {
     withRouter
 } from "react-router-dom";
 
-
 const PostFeed = require('../services/PostFeed');
 
 const useStyles = makeStyles(() => ({
@@ -24,34 +23,31 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-function Home() {
+function PostInfo(props) {
+    const postId = props.match.params.id;
     const classes = useStyles();
-    const [posts, setPosts] = React.useState([]);
+    const [comments, setComments] = React.useState([]);
 
-    // Get Posts 
+    // Get Comments for the selected Post 
     React.useEffect(() => {
-        PostFeed.getPosts().then(response => setPosts(response))
+        PostFeed.getComments(postId).then(response => setComments(response))
     });
+
     return (
         <React.Fragment>
             <Container>
                 <Typography variant="h3" gutterBottom>
-                    Posts from JSON Placeholder
+                    <Link to="/">Back to Posts</Link>
+                    <br />
+                    Comments
                 </Typography>
                 <List className={classes.root}>
                     {
-                        posts.map(post => {
+                        comments.map(comment => {
                             return (
                                 <React.Fragment>
                                     <ListItem>
-                                        <ListItemText primary={post.title}
-                                            secondary={
-                                                <React.Fragment>
-                                                    {post.body}
-                                                    <br />
-                                                    <Link to={`/post/${post.userId}`}>Show Comments</Link>
-                                                </React.Fragment>}
-                                        />
+                                        <ListItemText primary={comment.name} secondary={comment.body} />
                                     </ListItem>
                                 </React.Fragment>
                             )
@@ -63,4 +59,4 @@ function Home() {
     )
 }
 
-export default withRouter(Home);
+export default withRouter(PostInfo);

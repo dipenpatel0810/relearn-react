@@ -2,8 +2,9 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { withRouter } from 'react-router-dom';
 
-export default function Counter() {
+function Counter() {
     const [count, setCount] = React.useState(0);
 
     function incrementCount() {
@@ -31,3 +32,5 @@ export default function Counter() {
     )
 
 }
+
+export default withRouter(Counter);
